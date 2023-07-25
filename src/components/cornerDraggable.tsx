@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import styled from 'styled-components';
 
 
@@ -44,46 +45,43 @@ export function CornerDraggable(props: CornerDraggableProps) {
     const handleDrag = (event: any) => {
       event.preventDefault()
       if (!dragging) return;
-      if (event.screenX === 0 && event.screenY === 0) {
-        return;
-      }
+      if (event.screenX === 0 && event.screenY === 0) return;
 
       let elem = document.getElementById("box");
       let bounding = elem!.getBoundingClientRect();
       if (!props.horizontal) {
-        const currentY = event.clientY;
+        const currentY = isMobile ? event.touches[0].clientY :event.clientY;
         let t = ((currentY - bounding.y) / bounding.height) * 100
-        if (t < 0) t = 0;
-        if (t > 100) t = 100;
+        t = Math.min(Math.max(t, 0), 100);
         setTop(t);
         props.handleChangeValue(t);
         return;
 
       }
 
-      const currentX = event.clientX;
+      const currentX = isMobile ? event.touches[0].clientX :event.clientX;
       let l = ((currentX - bounding.x) / bounding.width) * 100
-      if (l < 0) l = 0;
-      if (l > 100) l = 100;
+      l = Math.min(Math.max(l, 0), 100); 
       setLeft(l);
       props.handleChangeValue(l);
-
       return;
-
-
     };
 
     document.addEventListener("mousemove", handleDrag);
+    document.addEventListener("touchmove", handleDrag, { passive: false });
     document.addEventListener("mouseup", handleDragEnd);
+    document.addEventListener("touchend", handleDragEnd);
 
     return () => {
       document.removeEventListener("mousemove", handleDrag);
+      document.removeEventListener("touchmove", handleDrag);
       document.removeEventListener("mouseup", handleDragEnd);
+      document.removeEventListener("touchend", handleDragEnd);
     };
   }, [dragging, top, props]);
 
   return (
-    <Container isDragging={dragging} top={top} left={left} onMouseDown={handleDragStart} draggable>
+    <Container isDragging={dragging} top={top} left={left} onMouseDown={handleDragStart} onTouchStart={handleDragStart} draggable>
 
     </Container>
   );
