@@ -39,13 +39,6 @@ export function BorderRadius(props: BorderRadiusProps) {
   const [corner3, setCorner3] = useState(100);
   const [corner4, setCorner4] = useState(100);
 
-  // const router = createBrowserRouter([
-  //   {
-  //     element: <HomePage />,
-  //     path: "/",
-  //   },
-  // ]);
-
   return (
     <Container>
       <Box radius1={corner1} radius2={corner2} radius3={corner3} radius4={corner4} id="box">

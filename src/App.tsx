@@ -5,6 +5,10 @@ const router = createBrowserRouter([
   {
     element: <BorderRadius />,
     path: "/",
+  },
+  {
+    element: <BorderRadius />,
+    path: "/css-generator",
   }
 ]);
 
