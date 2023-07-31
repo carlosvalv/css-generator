@@ -18,6 +18,10 @@ const router = createBrowserRouter([
   {
     element: <BoxShadow />,
     path: "/css-generator/box-shadow",
+  },
+  {
+    element: <BoxShadow />,
+    path: "/box-shadow",
   }
 ]);
 
