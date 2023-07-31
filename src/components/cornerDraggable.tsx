@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect';
 import styled from 'styled-components';
 
 
-const Container = styled.div<{ top: number, left: number, isDragging: boolean }>`
+const Container = styled.div<{ top: number, left: number, dragging: number }>`
   width: 25px;
   height: 25px;
   border: solid 1px #000;
@@ -11,9 +11,9 @@ const Container = styled.div<{ top: number, left: number, isDragging: boolean }>
   top : ${props => props.top}%;
   left : ${props => props.left}%;
   cursor: move;
-  transform: ${props => props.isDragging ? "translate(-50%, -50%)" : "translate(-50%, -50%)"};
-  box-shadow: ${props => props.isDragging ? "0 0 10px rgba(0, 0, 0, 0.3)" : "none"};
-  background-color: ${props => (props.isDragging ? "#222" : "#fff")};
+  transform: ${props => props.dragging ? "translate(-50%, -50%)" : "translate(-50%, -50%)"};
+  box-shadow: ${props => props.dragging ? "0 0 10px rgba(0, 0, 0, 0.3)" : "none"};
+  background-color: ${props => (props.dragging ? "#222" : "#fff")};
   &:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: #222;
@@ -81,7 +81,7 @@ export function CornerDraggable(props: CornerDraggableProps) {
   }, [dragging, top, props]);
 
   return (
-    <Container isDragging={dragging} top={top} left={left} onMouseDown={handleDragStart} onTouchStart={handleDragStart} draggable>
+    <Container dragging={dragging ? 1 : 0} top={top} left={left} onMouseDown={handleDragStart} onTouchStart={handleDragStart} draggable>
 
     </Container>
   );

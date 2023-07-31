@@ -32,8 +32,11 @@ const BoxBorder = styled.div`
 `;
 
 const TextWrapper = styled.div`
-    background: #fafafa;
-    border: 1px solid #e3e3e3;  padding: 1em;
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  padding: 1em;
+  position: absolute;
+  bottom: -10em;
 `;
 
 const Text = styled.span`
@@ -68,10 +71,10 @@ export function BorderRadius(props: BorderRadiusProps) {
     <Container>
       <Box radius={borderRadius} id="box">
         <BoxBorder />
-          <CornerDraggable horizontal={false} initTop={corner1} initLeft={0} handleChangeValue={(val:number)=>{setCorner1(val)}} />
-          <CornerDraggable horizontal={true} initTop={100} initLeft={corner2} handleChangeValue={(val:number)=>{setCorner2(val)}}/>
-          <CornerDraggable horizontal={false} initTop={corner3} initLeft={100} handleChangeValue={(val:number)=>{setCorner3(val)}}/>
-          <CornerDraggable horizontal={true} initTop={0} initLeft={corner4} handleChangeValue={(val:number)=>{setCorner4(val)}}/>
+        <CornerDraggable horizontal={false} initTop={corner1} initLeft={0} handleChangeValue={(val:number)=>{setCorner1(val)}} />
+        <CornerDraggable horizontal={true} initTop={100} initLeft={corner2} handleChangeValue={(val:number)=>{setCorner2(val)}}/>
+        <CornerDraggable horizontal={false} initTop={corner3} initLeft={100} handleChangeValue={(val:number)=>{setCorner3(val)}}/>
+        <CornerDraggable horizontal={true} initTop={0} initLeft={corner4} handleChangeValue={(val:number)=>{setCorner4(val)}}/>
       </Box>
       <TextWrapper><Text>border-radius: {borderRadius};</Text></TextWrapper>
     </Container >
