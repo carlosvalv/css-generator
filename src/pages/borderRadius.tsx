@@ -40,7 +40,6 @@ const TextWrapper = styled.div`
 `;
 
 const Text = styled.span`
-  color: #fff;
   font-size: 20px;
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
   color: #000;
