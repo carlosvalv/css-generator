@@ -81,8 +81,6 @@ export function CornerDraggable(props: CornerDraggableProps) {
   }, [dragging, top, props]);
 
   return (
-    <Container dragging={dragging ? 1 : 0} top={top} left={left} onMouseDown={handleDragStart} onTouchStart={handleDragStart} draggable>
-
-    </Container>
+    <Container dragging={dragging ? 1 : 0} top={top} left={left} onMouseDown={handleDragStart} onTouchStart={handleDragStart} draggable />
   );
 }

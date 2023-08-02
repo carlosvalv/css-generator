@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CornerDraggable } from '../components/cornerDraggable';
+import { CodeBox } from '../components/codeBox';
 
 const Container = styled.div`
   position: absolute;
@@ -9,12 +10,15 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 2.5em;
+  align-items: center;
+  gap: 3em;
+  padding: 2em;
+  width: calc(100% - 4em);
 `;
 
 const Box = styled.div<{ radius: string}>`
-  width: 300px;
-  height: 300px;
+  width: 50vmin;
+  height: 50vmin;
   background-color: black;
   position: relative;
   border-radius: ${props => props.radius};
@@ -23,32 +27,15 @@ const Box = styled.div<{ radius: string}>`
 
 const BoxBorder = styled.div`
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 50vmin;
+  height: 50vmin;
   background-color: transparent;
   border: 2px dotted #000;
   top: -2px;
   left: -2px;
 `;
 
-const TextWrapper = styled.div`
-  background: #fafafa;
-  border: 1px solid #e3e3e3;
-  padding: 1em;
-  position: absolute;
-  bottom: -10em;
-`;
-
-const Text = styled.span`
-  font-size: 20px;
-  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-  color: #000;
-`;
-
-
-export type BorderRadiusProps = {
-
-}
+export type BorderRadiusProps = {}
 
 export function BorderRadius(props: BorderRadiusProps) {
   const [corner1, setCorner1] = useState(25);
@@ -75,7 +62,7 @@ export function BorderRadius(props: BorderRadiusProps) {
         <CornerDraggable horizontal={false} initTop={corner3} initLeft={100} handleChangeValue={(val:number)=>{setCorner3(val)}}/>
         <CornerDraggable horizontal={true} initTop={0} initLeft={corner4} handleChangeValue={(val:number)=>{setCorner4(val)}}/>
       </Box>
-      <TextWrapper><Text>border-radius: {borderRadius};</Text></TextWrapper>
+      <CodeBox text={'border-radius: ' + borderRadius} />
     </Container >
   );
 }
