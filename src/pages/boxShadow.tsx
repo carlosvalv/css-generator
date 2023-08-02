@@ -7,16 +7,34 @@ const Container = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3em;
+  padding: 2em;
+
+  @media (max-width: 900px) {
+    position: initial;
+    transform: none;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
   flex-direction: row;
   gap: 2.5em;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const Box = styled.div<{ boxShadow: string }>`
-  width: 300px;
-  height: 300px;
+  width: 50vmin;
+  height: 50vmin;
   background-color: black;
   position: relative;
-  margin: auto;
+  margin: auto 0;
   box-shadow: ${props => props.boxShadow};
   border-radius: 1em;
 `;
@@ -47,9 +65,6 @@ const TextWrapper = styled.div`
   background: #fafafa;
   border: 1px solid #e3e3e3;
   padding: 1em;
-  position: absolute;
-  bottom: -10em;
-  width: max-content;
 `;
 
 const Code = styled.span`
@@ -80,33 +95,35 @@ export function BoxShadow(props: BoxShadowProps) {
 
   return (
     <Container>
-      <Styles>
-        <Style>
-          <Text>Horizontal Offset</Text>
-          <Input type='range' max={100} min={-100} value={horizontalOffset} onChange={(e: any) => { setHorizontalOffset(e.target.value) }} />
-        </Style>
-        <Style>
-          <Text>Vertical Offset</Text>
-          <Input type='range' max={100} min={-100} value={verticallOffset} onChange={(e: any) => { setVerticallOffset(e.target.value) }} />
-        </Style>
-        <Style>
-          <Text>Blur</Text>
-          <Input type='range' max={300} min={0} value={blur} onChange={(e: any) => { setBlur(e.target.value) }} />
-        </Style>
-        <Style>
-          <Text>Spread Radius</Text>
-          <Input type='range' max={200} min={-200} value={spreadRadius} onChange={(e: any) => { setSpreadRadius(e.target.value) }} />
-        </Style>
-        <Style>
-          <Text>Opacity</Text>
-          <Input type='range' max={100} min={0} value={opacity * 100} onChange={(e: any) => { setOpacity(e.target.value / 100) }} />
-        </Style>
-        <Style>
-          <Text>Color</Text>
-          <Input type='color' value={shadowColor} onChange={(e: any) => { setShadowColor(e.target.value) }} />
-        </Style>
-      </Styles>
-      <Box boxShadow={boxShadow} />
+      <Wrapper>
+        <Styles>
+          <Style>
+            <Text>Horizontal Offset</Text>
+            <Input type='range' max={100} min={-100} value={horizontalOffset} onChange={(e: any) => { setHorizontalOffset(e.target.value) }} />
+          </Style>
+          <Style>
+            <Text>Vertical Offset</Text>
+            <Input type='range' max={100} min={-100} value={verticallOffset} onChange={(e: any) => { setVerticallOffset(e.target.value) }} />
+          </Style>
+          <Style>
+            <Text>Blur</Text>
+            <Input type='range' max={300} min={0} value={blur} onChange={(e: any) => { setBlur(e.target.value) }} />
+          </Style>
+          <Style>
+            <Text>Spread Radius</Text>
+            <Input type='range' max={200} min={-200} value={spreadRadius} onChange={(e: any) => { setSpreadRadius(e.target.value) }} />
+          </Style>
+          <Style>
+            <Text>Opacity</Text>
+            <Input type='range' max={100} min={0} value={opacity * 100} onChange={(e: any) => { setOpacity(e.target.value / 100) }} />
+          </Style>
+          <Style>
+            <Text>Color</Text>
+            <Input type='color' value={shadowColor} onChange={(e: any) => { setShadowColor(e.target.value) }} />
+          </Style>
+        </Styles>
+        <Box boxShadow={boxShadow} />
+      </Wrapper>
       <TextWrapper><Code>box-shadow: {boxShadow}</Code></TextWrapper>
 
     </Container >
