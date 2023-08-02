@@ -9,12 +9,15 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 2.5em;
+  align-items: center;
+  gap: 3em;
+  padding: 2em;
+  width: calc(100% - 4em);
 `;
 
 const Box = styled.div<{ radius: string}>`
-  width: 300px;
-  height: 300px;
+  width: 50vmin;
+  height: 50vmin;
   background-color: black;
   position: relative;
   border-radius: ${props => props.radius};
@@ -23,8 +26,8 @@ const Box = styled.div<{ radius: string}>`
 
 const BoxBorder = styled.div`
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 50vmin;
+  height: 50vmin;
   background-color: transparent;
   border: 2px dotted #000;
   top: -2px;
@@ -35,8 +38,6 @@ const TextWrapper = styled.div`
   background: #fafafa;
   border: 1px solid #e3e3e3;
   padding: 1em;
-  position: absolute;
-  bottom: -10em;
 `;
 
 const Text = styled.span`
