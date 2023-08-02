@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { CodeBox } from '../components/codeBox';
 
 const Container = styled.div`
   position: absolute;
@@ -44,33 +45,21 @@ const Text = styled.span`
 `;
 
 const Style = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    border-bottom: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border-bottom: 1px solid #eaeaea;
 `;
 
 const Styles = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
 `;
 
 const Input = styled.input`
   max-width: 300px;
   min-width: 250px;
-`;
-
-const TextWrapper = styled.div`
-  background: #fafafa;
-  border: 1px solid #e3e3e3;
-  padding: 1em;
-`;
-
-const Code = styled.span`
-  font-size: 20px;
-  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-  color: #000;
 `;
 
 export type BoxShadowProps = {
@@ -124,8 +113,7 @@ export function BoxShadow(props: BoxShadowProps) {
         </Styles>
         <Box boxShadow={boxShadow} />
       </Wrapper>
-      <TextWrapper><Code>box-shadow: {boxShadow}</Code></TextWrapper>
-
+      <CodeBox text={'box-shadow: ' + boxShadow} />
     </Container >
   );
 }
