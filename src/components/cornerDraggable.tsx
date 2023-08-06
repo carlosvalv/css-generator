@@ -14,10 +14,10 @@ const Container = styled.div<{ top: number, left: number, dragging: number }>`
   transform: ${props => props.dragging ? "translate(-50%, -50%)" : "translate(-50%, -50%)"};
   box-shadow: ${props => props.dragging ? "0 0 10px rgba(0, 0, 0, 0.3)" : "none"};
   background-color: ${props => (props.dragging ? "#222" : "#fff")};
-  &:hover {
+  &:hover, &:active {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: #222;
-  }
+    }
 `;
 
 export type CornerDraggableProps = {
