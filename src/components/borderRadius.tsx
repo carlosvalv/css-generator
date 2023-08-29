@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CornerDraggable } from '../components/cornerDraggable';
-import { CodeBox } from '../components/codeBox';
+import { CornerDraggable } from './cornerDraggable';
+import { CodeBox } from './codeBox';
 
 const Container = styled.div`
   position: absolute;
@@ -19,7 +19,7 @@ const Container = styled.div`
 const Box = styled.div<{ radius: string}>`
   width: 50vmin;
   height: 50vmin;
-  background-color: black;
+  background-color: #2727;
   position: relative;
   border-radius: ${props => props.radius};
   margin: auto;
@@ -30,7 +30,7 @@ const BoxBorder = styled.div`
   width: 50vmin;
   height: 50vmin;
   background-color: transparent;
-  border: 2px dotted #000;
+  border: 2px dotted #767676;
   top: -2px;
   left: -2px;
 `;

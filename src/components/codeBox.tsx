@@ -15,7 +15,7 @@ const Container = styled.div`
 const Text = styled.span`
   font-size: 20px;
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-  color: #272727;
+  color:#767676;
 `;
 
 const IconWrapper = styled.div`
@@ -33,9 +33,9 @@ const Copy = styled.div`
 
   &:hover{
     opacity: 1;
-    color: #272727;
+    color:#767676;
     svg{
-      fill: #272727;
+      fill:#767676;
     }
   }
 `;
@@ -49,7 +49,6 @@ const CopiedText = styled.span`
   font-size: 18px;
   font-weight: 600;
 `;
-
 
 export type CodeBoxProps = {
   text: string,
