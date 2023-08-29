@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CodeBox } from '../components/codeBox';
+import { CodeBox } from './codeBox';
 
 const Container = styled.div`
   position: absolute;
@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 const Box = styled.div<{ boxShadow: string }>`
   width: 50vmin;
   height: 50vmin;
-  background-color: black;
+  background-color: #2727;
   position: relative;
   margin: auto 0;
   box-shadow: ${props => props.boxShadow};
