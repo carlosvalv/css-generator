@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { LeftMenu } from '../components/leftMenu';
 import { BoxShadow } from '../components/boxShadow';
+import { lightTheme } from '../themes';
 
 const Container = styled.div`
   display: flex;
@@ -11,14 +12,16 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #fafafa;
+  background: ${props=>props.theme.colors.secondary500};
 `;
 
 export function BoxShadowPage() {
   return (
-    <Container>
-      <LeftMenu />
-      <Wrapper><BoxShadow /></Wrapper> 
-    </Container >
+    <ThemeProvider theme={lightTheme}>
+      <Container>
+        <LeftMenu />
+        <Wrapper><BoxShadow /></Wrapper> 
+      </Container >
+    </ThemeProvider>
   );
 }

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   position: sticky;
   height: calc(100vh - 2em);
-  background-color: #2727;
+  background-color: ${props=>props.theme.colors.primary500};
   min-width: 15em;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ const List = styled.div`
   gap: 1em;
   padding: 1em;
   a{
-    color:#fafafa;
+    color:${props=>props.theme.colors.secondary500};
     text-decoration: none;
     font-weight: 700;
     font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
@@ -39,14 +39,10 @@ const Title = styled.div`
   font-weight: 700;
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
   font-size: 20px;
-  color:#fff;
+  color: ${props=>props.theme.colors.white};
 `;
 
-export type LeftMenuProps = {
-}
-
-export function LeftMenu(props: LeftMenuProps) {
-
+export function LeftMenu() {
   return (
     <Container>
       <Title>css generator</Title>

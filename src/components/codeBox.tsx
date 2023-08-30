@@ -3,8 +3,8 @@ import { CopySvg } from './svgs/copySvg';
 import { useState } from 'react';
 
 const Container = styled.div`
-  background: #fafafa;
-  border: 1px solid #e3e3e3;
+  background: ${props=> props.theme.colors.secondary500};
+  border: 1px solid ${props=> props.theme.colors.secondary700};
   padding: 1em;
   border-radius: 0.25em;
   display: flex;
@@ -15,7 +15,7 @@ const Container = styled.div`
 const Text = styled.span`
   font-size: 20px;
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-  color:#767676;
+  color: ${props=> props.theme.colors.secondary900};
 `;
 
 const IconWrapper = styled.div`
@@ -33,9 +33,9 @@ const Copy = styled.div`
 
   &:hover{
     opacity: 1;
-    color:#767676;
+    color: ${props=> props.theme.colors.secondary900};
     svg{
-      fill:#767676;
+      fill: ${props=> props.theme.colors.secondary900};
     }
   }
 `;
@@ -45,7 +45,7 @@ const CopyText = styled.span`
 `;
 
 const CopiedText = styled.span`
-  color: #04AA6D;
+  color:  ${props=> props.theme.colors.success};
   font-size: 18px;
   font-weight: 600;
 `;

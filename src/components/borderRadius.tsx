@@ -19,7 +19,7 @@ const Container = styled.div`
 const Box = styled.div<{ radius: string}>`
   width: 50vmin;
   height: 50vmin;
-  background-color: #2727;
+  background-color: ${props=>props.theme.colors.primary500};
   position: relative;
   border-radius: ${props => props.radius};
   margin: auto;
@@ -30,7 +30,7 @@ const BoxBorder = styled.div`
   width: 50vmin;
   height: 50vmin;
   background-color: transparent;
-  border: 2px dotted #767676;
+  border: 2px dotted ${props=>props.theme.colors.secondary900};
   top: -2px;
   left: -2px;
 `;
