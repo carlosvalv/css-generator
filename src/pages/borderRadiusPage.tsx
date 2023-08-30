@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-  background: ${props=>props.theme.colors.secondary};
+  background: ${props=>props.theme.colors.secondary500};
 `;
 
 export type BorderRadiusProps = {}
