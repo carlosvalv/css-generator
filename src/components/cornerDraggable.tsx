@@ -6,17 +6,18 @@ import styled from 'styled-components';
 const Container = styled.div<{ top: number, left: number, dragging: number }>`
   width: 25px;
   height: 25px;
-  border: solid 1px #000;
+  border: solid 1px ${props=> props.theme.colors.black};
   position: absolute;
   top : ${props => props.top}%;
   left : ${props => props.left}%;
   cursor: move;
   transform: ${props => props.dragging ? "translate(-50%, -50%)" : "translate(-50%, -50%)"};
   box-shadow: ${props => props.dragging ? "0 0 10px rgba(0, 0, 0, 0.3)" : "none"};
-  background-color: ${props => (props.dragging ? "#2727" : "#fafafaa1")};
+  background-color: ${props => (props.dragging ? props.theme.colors.primary500 : props.theme.colors.secondary500)};
+  opacity: 0.6;
   &:hover, &:active {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    background-color: #2727;
+    background-color: ${props=> props.theme.colors.primary500};
     }
 `;
 

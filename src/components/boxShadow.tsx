@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 const Box = styled.div<{ boxShadow: string }>`
   width: 50vmin;
   height: 50vmin;
-  background-color: #2727;
+  background-color: ${props=>props.theme.colors.primary500};
   position: relative;
   margin: auto 0;
   box-shadow: ${props => props.boxShadow};
@@ -48,7 +48,7 @@ const Style = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid ${props=>props.theme.colors.secondary700};
 `;
 
 const Styles = styled.div`

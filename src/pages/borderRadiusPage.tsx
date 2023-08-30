@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { BorderRadius } from '../components/borderRadius';
 import { LeftMenu } from '../components/leftMenu';
+import { lightTheme } from '../themes';
 
 const Container = styled.div`
   display: flex;
@@ -11,16 +12,18 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #fafafa;
+  background: ${props=>props.theme.colors.secondary};
 `;
 
 export type BorderRadiusProps = {}
 
 export function BorderRadiusPage(props: BorderRadiusProps) {
   return (
-    <Container>
-      <LeftMenu />
-      <Wrapper><BorderRadius /></Wrapper> 
-    </Container >
+    <ThemeProvider theme={lightTheme}>
+      <Container>
+        <LeftMenu />
+        <Wrapper><BorderRadius /></Wrapper> 
+      </Container >
+    </ThemeProvider>
   );
 }
