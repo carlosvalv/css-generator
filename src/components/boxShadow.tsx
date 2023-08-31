@@ -13,7 +13,7 @@ const Container = styled.div`
   gap: 3em;
   padding: 2em;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
     position: initial;
     transform: none;
   }
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
   gap: 2.5em;
   align-items: center;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
     flex-direction: column-reverse;
   }
 `;
