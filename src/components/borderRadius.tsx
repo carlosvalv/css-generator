@@ -33,6 +33,11 @@ const BoxBorder = styled.div`
   border: 2px dotted ${props=>props.theme.colors.secondary900};
   top: -2px;
   left: -2px;
+
+  @media (max-width: 1200px) {
+    width: 60vmin;
+    height: 60vmin;
+  }
 `;
 
 export type BorderRadiusProps = {}
