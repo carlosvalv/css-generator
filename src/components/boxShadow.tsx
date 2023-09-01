@@ -38,6 +38,11 @@ const Box = styled.div<{ boxShadow: string }>`
   margin: auto 0;
   box-shadow: ${props => props.boxShadow};
   border-radius: 1em;
+  
+  @media (max-width: 1200px) {
+    width: 60vmin;
+    height: 60vmin;
+  }
 `;
 
 const Text = styled.span`
