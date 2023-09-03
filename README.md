@@ -28,7 +28,7 @@ To run the CSS Generator App on your local machine, follow these steps:
 ## Features
 - User-friendly interface for customizing CSS styles.
 - Real-time generation of CSS code.
-- Easily customizable properties, including colors, fonts, and layout options.
+- Easily customizable properties.
 
 ## Technologies Used
 This app was built with the following technologies:
