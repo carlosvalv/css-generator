@@ -23,6 +23,11 @@ const Box = styled.div<{ radius: string}>`
   position: relative;
   border-radius: ${props => props.radius};
   margin: auto;
+
+  @media (max-width: 1200px) {
+    width: 60vmin;
+    height: 60vmin;
+  }
 `;
 
 const BoxBorder = styled.div`
