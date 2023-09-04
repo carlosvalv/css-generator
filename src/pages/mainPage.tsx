@@ -5,6 +5,7 @@ import { lightTheme } from '../themes';
 import InterfaceProvider from '../providers/ui';
 import { Header } from '../components/header';
 import { BorderRadius } from '../components/borderRadius';
+import { Animation } from '../components/animation';
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +23,8 @@ const Wrapper = styled.div`
 
 export enum Page {
   BORDER_RADIUS = 1,
-  BOX_SHADOW = 2
+  BOX_SHADOW = 2,
+  ANIMATION = 3
 }
 
 export type MainPageProps = {
@@ -36,7 +38,9 @@ export function MainPage(props: MainPageProps) {
       case(Page.BORDER_RADIUS):
         return <BorderRadius />;
       case(Page.BOX_SHADOW):
-        return <BoxShadow />;      
+        return <BoxShadow />;
+      case(Page.ANIMATION):
+        return <Animation />;      
     }
   };
 

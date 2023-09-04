@@ -59,6 +59,7 @@ export function LeftMenu() {
       <List>
         <Link to={"/box-shadow"}>box shadow</Link>
         <Link to={"/border-radius"}>border radius</Link>
+        <Link to={"/animation"}>animations</Link>
       </List>
     </Container>
   );
