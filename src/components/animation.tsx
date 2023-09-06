@@ -1,6 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import { CodeBox } from './codeBox';
 import { useEffect, useState } from 'react';
+import { MenuItem, Select } from '@mui/material';
 
 const Container = styled.div`
   position: absolute;
@@ -60,8 +61,8 @@ const animation = keyframes`
 
 
 const Box = styled.div<{ animation: string }>`
-  width: 50vmin;
-  height: 50vmin;
+  width: 45vmin;
+  height: 45vmin;
   background-color: ${props => props.theme.colors.primary500};
   position: relative;
   margin: auto 0;
@@ -73,11 +74,10 @@ const Box = styled.div<{ animation: string }>`
   }
 `;
 
-const Style = styled.div`
+const Style = styled.div<{ row: boolean }>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => props.row ? "row" : "column"};
   gap: 1em;
-  border-bottom: 1px solid ${props => props.theme.colors.secondary700};
 `;
 
 const Styles = styled.div`
@@ -103,47 +103,83 @@ const Input = styled.input`
 
 `;
 
-export type AnimationProps = {
+const WrapperInputs = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+`;
 
+
+enum Time {
+  SECONDS = 0,
+  MILISECONDS = 1
 }
 
-export function Animation(props: AnimationProps) {
+export function Animation() {
   const [duration, setDuration] = useState(5);
+  const [durationMeasure, setDurationMeasure] = useState(Time.SECONDS);
   const [name, setName] = useState("animation");
   const [delay, setDelay] = useState(3);
+  const [delayMeasure, setDelayMeasure] = useState(Time.SECONDS);
   const [iterations, setIterations] = useState(2);
   const [animationText, setAnimationText] = useState("");
   const [infinite, setInfinite] = useState(false);
 
   useEffect(() => {
-    setAnimationText(`${duration}s ease-in-out ${delay}s ${infinite ? "infinite" : iterations} normal forwards;`)
-  }, [delay, duration, name, infinite])
+    let delayUnit = delayMeasure === Time.SECONDS ? "s" : "ms";
+    let durationUnit = durationMeasure === Time.SECONDS ? "s" : "ms";
+    setAnimationText(`${duration}${durationUnit} ease-in-out ${delay}${delayUnit} ${infinite ? "infinite" : iterations} normal forwards;`)
+  }, [delay, duration, name, infinite, iterations, delayMeasure, durationMeasure])
 
   return (
     <Container>
       <Wrapper>
         <Styles>
-          <Style>
+          <Style row={false}>
             <Text>Name</Text>
             <Input type='text' value={name} onChange={(e: any) => { setName(e.target.value) }} />
           </Style>
-          <Style>
+          <Style row={false}>
             <Text>Duration</Text>
-            <Input type='number' min={0} value={duration} onChange={(e: any) => { setDuration(e.target.value) }} />
+            <WrapperInputs>
+              <Input type='number' min={0} value={duration} onChange={(e: any) => { setDuration(e.target.value) }} />
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={durationMeasure}
+                label=""
+                onChange={(e: any) => setDurationMeasure(e.target.value)}>
+                <MenuItem value={Time.SECONDS}>Seconds</MenuItem>
+                <MenuItem value={Time.MILISECONDS}>Miliseconds</MenuItem>
+              </Select>
+            </WrapperInputs>
+
           </Style>
-          <Style>
+          <Style row={false}>
             <Text>Delay</Text>
-            <Input type='number' min={0} value={delay} onChange={(e: any) => { setDelay(e.target.value) }} />
+            <WrapperInputs>
+              <Input type='number' min={0} value={delay} onChange={(e: any) => { setDelay(e.target.value) }} />
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={delayMeasure}
+                label=""
+                onChange={(e: any) => setDelayMeasure(e.target.value)}>
+                <MenuItem value={Time.SECONDS}>Seconds</MenuItem>
+                <MenuItem value={Time.MILISECONDS}>Miliseconds</MenuItem>
+              </Select>
+            </WrapperInputs>
           </Style>
           {!infinite &&
-            <Style>
+            <Style row={false}>
               <Text>Iterations</Text>
               <Input type='number' min={0} value={iterations} onChange={(e: any) => { setIterations(e.target.value) }} />
             </Style>
           }
-          <Style>
+          <Style row={true}>
             <Text>Infinite</Text>
-            <Input type='checkbox' checked={infinite} onChange={(e: any) => { setInfinite(e.target.checked) }} />
+            <input type='checkbox' checked={infinite} onChange={(e: any) => { setInfinite(e.target.checked) }} />
           </Style>
         </Styles>
         <Box animation={animationText} />
