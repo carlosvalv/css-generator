@@ -19,6 +19,11 @@ const Wrapper = styled.div`
   background: ${props => props.theme.colors.secondary500};
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 1200px) {
+    overflow-y: auto;
+    height: 100vh;
+  }
 `;
 
 export enum Page {

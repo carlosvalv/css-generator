@@ -72,7 +72,7 @@ export function BorderRadius(props: BorderRadiusProps) {
         <CornerDraggable horizontal={false} initTop={corner3} initLeft={100} handleChangeValue={(val:number)=>{setCorner3(val)}}/>
         <CornerDraggable horizontal={true} initTop={0} initLeft={corner4} handleChangeValue={(val:number)=>{setCorner4(val)}}/>
       </Box>
-      <CodeBox text={'border-radius: ' + borderRadius} />
+      <CodeBox text={'border-radius: ' + borderRadius} multiLine={false} />
     </Container >
   );
 }

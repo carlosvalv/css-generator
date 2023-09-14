@@ -4,10 +4,6 @@ import { useEffect, useState } from 'react';
 import { MenuItem, Select } from '@mui/material';
 
 const Container = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,8 +28,7 @@ const Wrapper = styled.div`
 `;
 
 const animation = keyframes`
-  0%,
-	100% {
+    0%, 100% {
 		transform: translateX(0%);
 		transform-origin: 50% 50%;
 	}
@@ -110,7 +105,6 @@ const WrapperInputs = styled.div`
     gap: 1em;
 `;
 
-
 enum Time {
   SECONDS = 0,
   MILISECONDS = 1
@@ -184,8 +178,8 @@ export function Animation() {
         </Styles>
         <Box animation={animationText} />
       </Wrapper>
-      <CodeBox text={"animation: " + name + " " + animationText} />
-      <CodeBox text={animation.rules} />
+      <CodeBox text={"animation: " + name + " " + animationText} multiLine={false} />
+      <CodeBox text={animation.rules} multiLine={true}/>
     </Container >
   );
 }
