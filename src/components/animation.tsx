@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import { CodeBox } from './codeBox';
 import { useEffect, useState } from 'react';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 const Container = styled.div`
   display: flex;
@@ -80,28 +80,11 @@ const Styles = styled.div`
   gap: 1.5em;
 `;
 
-const Text = styled.span`
-  font-size: 14px;
-`;
-
-const Input = styled.input`
-  max-width: 300px;
-  min-width: 250px;
-  background-color: ${props => props.theme.colors.secondary500};
-  border: 1px solid ${props => props.theme.colors.secondary900};
-  border-radius: 4px;
-  font-size: 16px;
-  &:focus{
-    outline: 1px solid ${props => props.theme.colors.primary500};
-  }
-
-`;
-
 const WrapperInputs = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
 `;
 
 enum Time {
@@ -145,13 +128,11 @@ export function Animation() {
       <Wrapper>
         <Styles>
           <Style row={false}>
-            <Text>Name</Text>
-            <Input type='text' value={name} onChange={(e: any) => { setName(e.target.value) }} />
+            <TextField label="Name" value={name} onChange={(e: any) => { setName(e.target.value) }}></TextField>
           </Style>
           <Style row={false}>
-            <Text>Duration</Text>
             <WrapperInputs>
-              <Input type='number' min={0} value={duration} onChange={(e: any) => { setDuration(e.target.value) }} />
+              <TextField type='number' label="Duration" InputProps={{ inputProps: { min: 0} }} value={duration} onChange={(e: any) => { setDuration(e.target.value) }} />
               <Select value={durationMeasure} onChange={(e: any) => setDurationMeasure(e.target.value)}>
                 <MenuItem value={Time.SECONDS}>Seconds</MenuItem>
                 <MenuItem value={Time.MILISECONDS}>Miliseconds</MenuItem>
@@ -159,9 +140,8 @@ export function Animation() {
             </WrapperInputs>
           </Style>
           <Style row={false}>
-            <Text>Delay</Text>
             <WrapperInputs>
-              <Input type='number' min={0} value={delay} onChange={(e: any) => { setDelay(e.target.value) }} />
+              <TextField type='number' label="Delay" InputProps={{ inputProps: { min: 0} }} value={delay} onChange={(e: any) => { setDelay(e.target.value) }} />
               <Select
                 value={delayMeasure}
                 onChange={(e: any) => setDelayMeasure(e.target.value)}>
@@ -172,13 +152,11 @@ export function Animation() {
           </Style>
           {!infinite &&
             <Style row={false}>
-              <Text>Iterations</Text>
-              <Input type='number' min={0} value={iterations} onChange={(e: any) => { setIterations(e.target.value) }} />
+              <TextField label="Iterations" type='number' InputProps={{ inputProps: { min: 0} }} value={iterations} onChange={(e: any) => { setIterations(e.target.value) }} />
             </Style>
           }
           <Style row={true}>
-            <Text>Infinite</Text>
-            <input type='checkbox' checked={infinite} onChange={(e: any) => { setInfinite(e.target.checked) }} />
+            <FormControlLabel control={<Checkbox/>} label="Infinite" checked={infinite} onChange={(e: any) => { setInfinite(e.target.checked) }} />
           </Style>
           <Style row={false}>
             <FormControl>
