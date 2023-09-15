@@ -1,7 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import { CodeBox } from './codeBox';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Direction, FillMode, Time } from '../enums/animation';
 
 const Container = styled.div`
   display: flex;
@@ -68,9 +69,9 @@ const Box = styled.div<{ animation: string }>`
   }
 `;
 
-const Style = styled.div<{ row: boolean }>`
+const Style = styled.div`
   display: flex;
-  flex-direction: ${props => props.row ? "row" : "column"};
+  flex-direction: row;
   gap: 1em;
 `;
 
@@ -87,24 +88,6 @@ const WrapperInputs = styled.div`
   gap: 1em;
 `;
 
-enum Time {
-  SECONDS = 0,
-  MILISECONDS = 1
-}
-
-enum Direction {
-  NORMAL = "normal",
-  REVERSE = "reverse",
-  ALTERNATE = "alternate",
-  ALTERNATE_REVERSE = "alternate-reverse"
-}
-
-enum FillMode {
-  NONE = "none",
-  FORWARDS = "forwards",
-  BACKWARDS = "backwards",
-  BOTH = "both"
-}
 export function Animation() {
   const [duration, setDuration] = useState(5);
   const [durationMeasure, setDurationMeasure] = useState(Time.SECONDS);
@@ -116,21 +99,30 @@ export function Animation() {
   const [direction, setDirection] = useState(Direction.NORMAL);
   const [fillMode, setFillMode] = useState(FillMode.FORWARDS);
   const [infinite, setInfinite] = useState(false);
+  const refSquare = useRef(null);
 
   useEffect(() => {
     let delayUnit = delayMeasure === Time.SECONDS ? "s" : "ms";
     let durationUnit = durationMeasure === Time.SECONDS ? "s" : "ms";
     setAnimationText(`${duration}${durationUnit} linear ${delay}${delayUnit} ${infinite ? "infinite" : iterations} ${direction} ${fillMode};`)
+    if(infinite) return;
+    if(!refSquare || !refSquare.current) return;
+    //@ts-ignore
+    refSquare.current.style.animation = "none";
+    setTimeout(() => {
+      //@ts-ignore
+      refSquare.current.style.animation = "";
+    }, 200);
   }, [delay, duration, name, infinite, iterations, delayMeasure, durationMeasure, direction, fillMode])
 
   return (
     <Container>
       <Wrapper>
         <Styles>
-          <Style row={false}>
-            <TextField label="Name" value={name} onChange={(e: any) => { setName(e.target.value) }}></TextField>
+          <Style>
+            <TextField style={{flex:1}} label="Name" value={name} onChange={(e: any) => { setName(e.target.value) }}></TextField>
           </Style>
-          <Style row={false}>
+          <Style>
             <WrapperInputs>
               <TextField type='number' label="Duration" InputProps={{ inputProps: { min: 0} }} value={duration} onChange={(e: any) => { setDuration(e.target.value) }} />
               <Select value={durationMeasure} onChange={(e: any) => setDurationMeasure(e.target.value)}>
@@ -139,7 +131,7 @@ export function Animation() {
               </Select>
             </WrapperInputs>
           </Style>
-          <Style row={false}>
+          <Style>
             <WrapperInputs>
               <TextField type='number' label="Delay" InputProps={{ inputProps: { min: 0} }} value={delay} onChange={(e: any) => { setDelay(e.target.value) }} />
               <Select
@@ -151,15 +143,15 @@ export function Animation() {
             </WrapperInputs>
           </Style>
           {!infinite &&
-            <Style row={false}>
-              <TextField label="Iterations" type='number' InputProps={{ inputProps: { min: 0} }} value={iterations} onChange={(e: any) => { setIterations(e.target.value) }} />
+            <Style>
+              <TextField  style={{flex:1}} label="Iterations" type='number' InputProps={{ inputProps: { min: 0} }} value={iterations} onChange={(e: any) => { setIterations(e.target.value) }} />
             </Style>
           }
-          <Style row={true}>
+          <Style>
             <FormControlLabel control={<Checkbox/>} label="Infinite" checked={infinite} onChange={(e: any) => { setInfinite(e.target.checked) }} />
           </Style>
-          <Style row={false}>
-            <FormControl>
+          <Style>
+            <FormControl style={{flex:1}}>
                 <InputLabel id="demo-simple-select-label">Direction</InputLabel>
                 <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Direction" onChange={(e: any) => { setDirection(e.target.value) }} value={direction}>
                   <MenuItem value={Direction.ALTERNATE}>{Direction.ALTERNATE}</MenuItem>
@@ -169,8 +161,8 @@ export function Animation() {
                 </Select>
             </FormControl>
           </Style>
-          <Style row={false}>
-            <FormControl>
+          <Style>
+            <FormControl style={{flex:1}}>
                 <InputLabel id="demo-simple-select-label">Fill mode</InputLabel>
                 <Select labelId="demo-simple-select-label" id="demo-simple-select" label="Fill mode" onChange={(e: any) => { setFillMode(e.target.value) }} value={fillMode}>
                   <MenuItem value={FillMode.BACKWARDS}>{FillMode.BACKWARDS}</MenuItem>
@@ -181,7 +173,7 @@ export function Animation() {
             </FormControl>
           </Style>
         </Styles>
-        <Box animation={animationText} />
+        <Box animation={animationText} ref={refSquare} />
       </Wrapper>
       <CodeBox text={"animation: " + name + " " + animationText} multiLine={false} />
       <CodeBox text={animation.rules} multiLine={true} />

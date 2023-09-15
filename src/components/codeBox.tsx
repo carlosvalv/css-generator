@@ -13,11 +13,11 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Text = styled.span<{ multiline: boolean }>`
+const Text = styled.span<{ multiline: number }>`
   font-size: 20px;
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
   color: ${props => props.theme.colors.secondary900};
-  ${props => props.multiline && "white-space: pre;"};
+  ${props => props.multiline === 1 && "white-space: pre;"};
   tab-size: 4;
 `;
 
@@ -26,16 +26,16 @@ const IconWrapper = styled.div`
   width: 1.25em;
 `;
 
-const Copy = styled.div<{ corner: boolean, copying: boolean }>`
+const Copy = styled.div<{ corner: number, copying: number }>`
   cursor: ${props => props.copying ? "inherit" : "pointer"};
   font-weight: 600;
   display: flex;
   gap: 0.5em;
   align-items: center;
-  opacity: ${props => props.copying ? "1" : "0.4"};
-  ${props => props.corner && "position: absolute"};
-  ${props => props.corner && "top: 0.75em"};
-  ${props => props.corner && "right: 0.75em"};
+  opacity: ${props => props.copying === 1 ? "1" : "0.4"};
+  ${props => props.corner === 1 && "position: absolute"};
+  ${props => props.corner === 1 && "top: 0.75em"};
+  ${props => props.corner === 1 && "right: 0.75em"};
   &:hover{
     opacity: 1;
     color: ${props => props.theme.colors.secondary900};
@@ -73,8 +73,8 @@ export function CodeBox(props: CodeBoxProps) {
 
   return (
     <Container>
-      <Text multiline={props.multiLine}>{props.text}</Text>
-      <Copy onClick={copyToClipboard} corner={props.multiLine} copying={copying}>
+      <Text multiline={props.multiLine ? 1 : 0}>{props.text}</Text>
+      <Copy onClick={copyToClipboard} corner={props.multiLine ? 1 : 0} copying={copying ? 1 : 0}>
         {copying ?
           <CopiedText>Copied!</CopiedText>
           :
