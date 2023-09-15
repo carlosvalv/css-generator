@@ -53,7 +53,7 @@ export function MainPage(props: MainPageProps) {
     <ThemeProvider theme={lightTheme}>
       <InterfaceProvider page={props.page}>
         <Container>
-          <LeftMenu />
+          <LeftMenu page={props.page}/>
           <Wrapper>
             <Header />
             {renderComponent()}
