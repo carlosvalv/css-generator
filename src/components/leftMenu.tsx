@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import InterfaceContext from '../context/interface';
 import { useContext } from 'react';
+import { Page } from '../pages/mainPage';
 
 const Container = styled.div<{open: boolean}>`
   position: sticky;
@@ -29,13 +30,16 @@ const List = styled.div`
   flex-direction: column;
   gap: 1em;
   padding: 1em;
+`;
+
+const LinkWrapper = styled.div<{highlight: number}>`
   a{
     color:${props=>props.theme.colors.secondary500};
     text-decoration: none;
     font-weight: 700;
     font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
     font-size: 16px;
-    opacity: 0.7;
+    opacity: ${props=> props.highlight ? "1" : "0.6"};
     transition:opacity 0.44s;
     &:hover{
       opacity: 1;
@@ -50,16 +54,20 @@ const Title = styled.div`
   color: ${props=>props.theme.colors.white};
 `;
 
-export function LeftMenu() {
+export type LeftMenuProps = {
+  page: Page
+}
+
+export function LeftMenu(props: LeftMenuProps) {
   const [state] = useContext(InterfaceContext)!;
 
   return ( 
     <Container open={state.openMenu}>
       <Title>css generator</Title>
       <List>
-        <Link to={"/box-shadow"}>box shadow</Link>
-        <Link to={"/border-radius"}>border radius</Link>
-        <Link to={"/animation"}>animations</Link>
+        <LinkWrapper highlight={props.page === Page.BOX_SHADOW ? 1 : 0}><Link to={"/box-shadow"}>box shadow</Link></LinkWrapper>
+        <LinkWrapper highlight={props.page === Page.BORDER_RADIUS ? 1 : 0}><Link to={"/border-radius"}>border radius</Link></LinkWrapper>
+        <LinkWrapper highlight={props.page === Page.ANIMATION ? 1 : 0}><Link to={"/animation"}>animations</Link></LinkWrapper>
       </List>
     </Container>
   );
