@@ -8,6 +8,7 @@ function App() {
         <Route path="/" element={<MainPage page={Page.BORDER_RADIUS} />}/> 
         <Route path="/box-shadow/" element={<MainPage page={Page.BOX_SHADOW} />}/> 
         <Route path="/border-radius/" element={<MainPage page={Page.BORDER_RADIUS} />}/> 
+        <Route path="/animation/" element={<MainPage page={Page.ANIMATION} />}/> 
       </Routes>
     </HashRouter>
   );

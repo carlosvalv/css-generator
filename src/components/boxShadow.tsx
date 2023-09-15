@@ -118,7 +118,7 @@ export function BoxShadow(props: BoxShadowProps) {
         </Styles>
         <Box boxShadow={boxShadow} />
       </Wrapper>
-      <CodeBox text={'box-shadow: ' + boxShadow} />
+      <CodeBox text={'box-shadow: ' + boxShadow} multiLine={false}/>
     </Container >
   );
 }

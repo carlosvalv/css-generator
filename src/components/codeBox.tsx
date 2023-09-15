@@ -3,19 +3,22 @@ import { CopySvg } from './svgs/copySvg';
 import { useState } from 'react';
 
 const Container = styled.div`
-  background: ${props=> props.theme.colors.secondary500};
-  border: 1px solid ${props=> props.theme.colors.secondary700};
-  padding: 1em;
+  background: ${props => props.theme.colors.secondary500};
+  border: 1px solid ${props => props.theme.colors.secondary700};
   border-radius: 0.25em;
   display: flex;
   gap: 1.5em;
   align-items: center;
+  padding: 1em;
+  position: relative;
 `;
 
-const Text = styled.span`
+const Text = styled.span<{ multiline: number }>`
   font-size: 20px;
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-  color: ${props=> props.theme.colors.secondary900};
+  color: ${props => props.theme.colors.secondary900};
+  ${props => props.multiline === 1 && "white-space: pre;"};
+  tab-size: 4;
 `;
 
 const IconWrapper = styled.div`
@@ -23,19 +26,21 @@ const IconWrapper = styled.div`
   width: 1.25em;
 `;
 
-const Copy = styled.div`
-  cursor: pointer;
+const Copy = styled.div<{ corner: number, copying: number }>`
+  cursor: ${props => props.copying ? "inherit" : "pointer"};
   font-weight: 600;
   display: flex;
   gap: 0.5em;
   align-items: center;
-  opacity: 0.4;
-
+  opacity: ${props => props.copying === 1 ? "1" : "0.4"};
+  ${props => props.corner === 1 && "position: absolute"};
+  ${props => props.corner === 1 && "top: 0.75em"};
+  ${props => props.corner === 1 && "right: 0.75em"};
   &:hover{
     opacity: 1;
-    color: ${props=> props.theme.colors.secondary900};
+    color: ${props => props.theme.colors.secondary900};
     svg{
-      fill: ${props=> props.theme.colors.secondary900};
+      fill: ${props => props.theme.colors.secondary900};
     }
   }
 `;
@@ -45,13 +50,14 @@ const CopyText = styled.span`
 `;
 
 const CopiedText = styled.span`
-  color:  ${props=> props.theme.colors.success};
+  color:  ${props => props.theme.colors.success};
   font-size: 18px;
   font-weight: 600;
 `;
 
 export type CodeBoxProps = {
   text: string,
+  multiLine: boolean
 }
 
 export function CodeBox(props: CodeBoxProps) {
@@ -67,14 +73,17 @@ export function CodeBox(props: CodeBoxProps) {
 
   return (
     <Container>
-      <Text>{props.text}</Text>
-      {copying ?
-        <CopiedText>Copied!</CopiedText> :
-        <Copy onClick={copyToClipboard}>
-          <CopyText>Copy</CopyText>
-          <IconWrapper><CopySvg /></IconWrapper>
-        </Copy>
-      }
+      <Text multiline={props.multiLine ? 1 : 0}>{props.text}</Text>
+      <Copy onClick={copyToClipboard} corner={props.multiLine ? 1 : 0} copying={copying ? 1 : 0}>
+        {copying ?
+          <CopiedText>Copied!</CopiedText>
+          :
+          <>
+            <CopyText>Copy</CopyText>
+            <IconWrapper><CopySvg /></IconWrapper>
+          </>
+        }
+      </Copy>
     </Container>
   );
 }
