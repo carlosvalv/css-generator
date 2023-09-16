@@ -19,6 +19,10 @@ const Text = styled.span<{ multiline: number }>`
   color: ${props => props.theme.colors.secondary900};
   ${props => props.multiline === 1 && "white-space: pre;"};
   tab-size: 4;
+
+  @media (max-width: 800px) {
+    white-space: inherit;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -42,6 +46,10 @@ const Copy = styled.div<{ corner: number, copying: number }>`
     svg{
       fill: ${props => props.theme.colors.secondary900};
     }
+  }
+
+  @media (max-width: 800px) {
+    position: inherit
   }
 `;
 

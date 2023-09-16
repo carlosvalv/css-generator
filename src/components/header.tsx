@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { MenuSvg } from './svgs/menuSvg';
 
 const Container = styled.div`
-  z-index: 1;
+  z-index: 2;
   position: sticky;
   top: 0;
   min-height: 3em;

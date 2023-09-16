@@ -24,3 +24,8 @@ export enum Timing {
   EASE_OUT = "ease-out",
   EASE_IN_OUT = "ease-in-out"
 }
+
+export enum AnimationType {
+  BOUNCE = 0,
+  BLINK = 1,
+}

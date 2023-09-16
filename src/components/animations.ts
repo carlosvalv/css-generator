@@ -26,3 +26,16 @@ export const bounce = keyframes`
 		transform: translateX(-6px) rotate(-1.2deg);
 	}
 `;
+
+export const blink = keyframes`
+	0%,
+	50%,
+	100% {
+		opacity: 1;
+	}
+
+	25%,
+	75% {
+		opacity: 0;
+	}
+`

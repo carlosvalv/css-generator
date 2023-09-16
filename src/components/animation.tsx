@@ -2,26 +2,31 @@ import styled from 'styled-components';
 import { CodeBox } from './codeBox';
 import { useEffect, useRef, useState } from 'react';
 import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { Direction, FillMode, Time, Timing } from '../enums/animation';
-import { bounce } from './animations';
+import { AnimationType, Direction, FillMode, Time, Timing } from '../enums/animation';
+import { blink, bounce } from './animations';
+
+const animations = [bounce, blink];
+
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3em;
-  padding: 2em;
+  padding: 4em;
 
   @media (max-width: 1200px) {
     position: initial;
     transform: none;
+    padding: 3em;
+    gap: 2em;
   }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 2.5em;
+  gap: 3.5em;
   align-items: center;
 
   @media (max-width: 1200px) {
@@ -29,17 +34,17 @@ const Wrapper = styled.div`
   }
 `;
 
-const Box = styled.div<{ animation: string }>`
-  width: 45vmin;
-  height: 45vmin;
+const Box = styled.div<{ animation: string, type: number }>`
+  width: 40vmin;
+  height: 40vmin;
   background-color: ${props => props.theme.colors.primary500};
   position: relative;
   margin: auto 0;
   border-radius: 1em;
-  animation: ${bounce} ${props => props.animation};
+  animation: ${props=> animations[props.type]} ${props => props.animation};
   @media (max-width: 1200px) {
-    width: 60vmin;
-    height: 60vmin;
+    width: 55vmin;
+    height: 55vmin;
   }
 `;
 
@@ -73,6 +78,7 @@ export function Animation() {
   const [direction, setDirection] = useState(Direction.NORMAL);
   const [fillMode, setFillMode] = useState(FillMode.FORWARDS);
   const [timingMode, setTimingMode] = useState(Timing.EASE);
+  const [animationType, setAnimationType] = useState(AnimationType.BLINK);
   const [infinite, setInfinite] = useState(false);
   const refSquare = useRef(null);
 
@@ -98,6 +104,15 @@ export function Animation() {
             <TextField style={{ flex: 1 }} label="Name" value={name} onChange={(e: any) => { setName(e.target.value) }}></TextField>
           </Style>
           <Style>
+            <FormControl style={{ flex: 1 }}>
+              <InputLabel id="animation-type-label">Type</InputLabel>
+              <Select labelId="animation-type-label" label="Type" onChange={(e: any) => { setAnimationType(e.target.value) }} value={animationType}>
+              <MenuItem value={AnimationType.BLINK}>Blink</MenuItem>
+                <MenuItem value={AnimationType.BOUNCE}>Bounce</MenuItem>
+              </Select>
+            </FormControl>
+          </Style>
+          <Style>
             <WrapperInputs>
               <TextField type='number' label="Duration" InputProps={{ inputProps: { min: 0 } }} value={duration} onChange={(e: any) => { setDuration(e.target.value) }} />
               <Select value={durationMeasure} onChange={(e: any) => setDurationMeasure(e.target.value)}>
@@ -109,9 +124,7 @@ export function Animation() {
           <Style>
             <WrapperInputs>
               <TextField type='number' label="Delay" InputProps={{ inputProps: { min: 0 } }} value={delay} onChange={(e: any) => { setDelay(e.target.value) }} />
-              <Select
-                value={delayMeasure}
-                onChange={(e: any) => setDelayMeasure(e.target.value)}>
+              <Select value={delayMeasure} onChange={(e: any) => setDelayMeasure(e.target.value)}>
                 <MenuItem value={Time.SECONDS}>Seconds</MenuItem>
                 <MenuItem value={Time.MILISECONDS}>Miliseconds</MenuItem>
               </Select>
@@ -119,11 +132,11 @@ export function Animation() {
           </Style>
           {!infinite &&
             <Style>
-              <TextField style={{ flex: 1 }} label="Iterations" type='number' InputProps={{ inputProps: { min: 0 } }} value={iterations} onChange={(e: any) => { setIterations(e.target.value) }} />
+              <TextField style={{ flex: 1}} label="Iterations" type='number' InputProps={{ inputProps: { min: 0 } }} value={iterations} onChange={(e: any) => { setIterations(e.target.value) }} />
             </Style>
           }
           <Style>
-            <FormControlLabel control={<Checkbox />} label="Infinite" checked={infinite} onChange={(e: any) => { setInfinite(e.target.checked) }} />
+            <FormControlLabel style={{paddingLeft: 2}} control={<Checkbox />} label="Infinite" checked={infinite} onChange={(e: any) => { setInfinite(e.target.checked) }} />
           </Style>
           <Style>
             <FormControl style={{ flex: 1 }}>
@@ -156,10 +169,10 @@ export function Animation() {
             </FormControl>
           </Style>
         </Styles>
-        <Box animation={animationText} ref={refSquare} />
+        <Box animation={animationText} type={animationType} ref={refSquare} />
       </Wrapper>
       <CodeBox text={"animation: " + name + " " + animationText} multiLine={false} />
-      <CodeBox text={bounce.rules} multiLine={true} />
+      <CodeBox text={animations[0].rules} multiLine={true} />
     </Container >
   );
 }

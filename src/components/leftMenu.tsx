@@ -21,7 +21,7 @@ const Container = styled.div<{open: boolean}>`
     position: fixed;
     margin-top: 65px;
     width: calc(100vw - 2em);
-    z-index: 1;
+    z-index: 2;
   }
 `;
 
