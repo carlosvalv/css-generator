@@ -172,7 +172,7 @@ export function Animation() {
         <Box animation={animationText} type={animationType} ref={refSquare} />
       </Wrapper>
       <CodeBox text={"animation: " + name + " " + animationText} multiLine={false} />
-      <CodeBox text={animations[0].rules} multiLine={true} />
+      <CodeBox text={animations[animationType].rules} multiLine={true} />
     </Container >
   );
 }
