@@ -2,15 +2,19 @@ import styled from 'styled-components';
 import { CopySvg } from './svgs/copySvg';
 import { useState } from 'react';
 
-const Container = styled.div`
+const Container = styled.div<{ multiline: number }>`
   background: ${props => props.theme.colors.secondary500};
   border: 1px solid ${props => props.theme.colors.secondary700};
   border-radius: 0.25em;
   display: flex;
   gap: 1.5em;
   align-items: center;
-  padding: 1em;
+  padding: ${props=> props.multiline ? "2.5em" : "1.5em"};
   position: relative;
+  min-width: 200px;
+  @media (max-width: 800px) {
+    padding: 1.5em
+  }
 `;
 
 const Text = styled.span<{ multiline: number }>`
@@ -80,7 +84,7 @@ export function CodeBox(props: CodeBoxProps) {
   };
 
   return (
-    <Container>
+    <Container multiline={props.multiLine ? 1 : 0}>
       <Text multiline={props.multiLine ? 1 : 0}>{props.text}</Text>
       <Copy onClick={copyToClipboard} corner={props.multiLine ? 1 : 0} copying={copying ? 1 : 0}>
         {copying ?
