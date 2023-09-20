@@ -94,7 +94,7 @@ export function Animation() {
       //@ts-ignore
       refSquare.current.style.animation = "";
     }, 200);
-  }, [delay, duration, name, infinite, iterations, delayMeasure, durationMeasure, direction, fillMode, timingMode])
+  }, [delay, duration, infinite, iterations, delayMeasure, durationMeasure, direction, fillMode, timingMode])
 
   return (
     <Container>
@@ -172,7 +172,7 @@ export function Animation() {
         <Box animation={animationText} type={animationType} ref={refSquare} />
       </Wrapper>
       <CodeBox text={"animation: " + name + " " + animationText} multiLine={false} />
-      <CodeBox text={animations[animationType].rules} multiLine={true} />
+      <CodeBox text={"@keyframes " + name + "{" +animations[animationType].rules +"}"} multiLine={true} />
     </Container >
   );
 }
