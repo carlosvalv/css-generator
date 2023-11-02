@@ -77,20 +77,11 @@ function BoxShadow() {
   const [boxShadow, setBoxShadow] = useState('');
 
   useEffect(() => {
-    const r = parseInt(shadowColor.slice(1, 3), 16);
-    const g = parseInt(shadowColor.slice(3, 5), 16);
-    const b = parseInt(shadowColor.slice(5, 7), 16);
-    setBoxShadow(
-      `rgba(${r}, ${g}, ${b}, ${opacity}) ${horizontalOffset}px ${verticallOffset}px ${blur}px ${spreadRadius}px;`,
-    );
-  }, [
-    horizontalOffset,
-    verticallOffset,
-    blur,
-    spreadRadius,
-    opacity,
-    shadowColor,
-  ]);
+    const r = parseInt(shadowColor.slice(1, 3), 16)
+    const g = parseInt(shadowColor.slice(3, 5), 16)
+    const b = parseInt(shadowColor.slice(5, 7), 16)
+    setBoxShadow(`rgba(${r}, ${g}, ${b}, ${opacity}) ${horizontalOffset}px ${verticallOffset}px ${blur}px ${spreadRadius}px;`);
+  }, [horizontalOffset, verticallOffset, blur, spreadRadius, opacity, shadowColor]);
 
   return (
     <Container>
