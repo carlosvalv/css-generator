@@ -1,0 +1,47 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "import", "@typescript-eslint", "prettier"],
+  "ignorePatterns": ["build"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "consistent-return": "off",
+    "no-underscore-dangle" : "off",
+    "react/react-in-jsx-scope" : "off",
+    "react/jsx-no-constructed-context-values" : "off",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "@typescript-eslint/quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ]
+  }
+}
