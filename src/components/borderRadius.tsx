@@ -52,12 +52,10 @@ function BorderRadius() {
   const [corner4, setCorner4] = useState(71);
   const [borderRadius, setBorderRadius] = useState('');
 
-  const toFloat = (value: number)=>{
-    return parseFloat(value.toString()).toFixed(1);
-  }
+  const toFloat = (value: number) => parseFloat(value.toString()).toFixed(1);
 
-  useEffect(()=>{
-    let string =  `${toFloat(corner4)}% ${toFloat(100 - corner4)}% ${toFloat(100 - corner2)}% ${toFloat(corner2)}%/ ${toFloat(corner1)}% ${toFloat(corner3)}% ${toFloat(100 - corner3)}% ${toFloat(100 - corner1)}%`;
+  useEffect(() => {
+    const string = `${toFloat(corner4)}% ${toFloat(100 - corner4)}% ${toFloat(100 - corner2)}% ${toFloat(corner2)}%/ ${toFloat(corner1)}% ${toFloat(corner3)}% ${toFloat(100 - corner3)}% ${toFloat(100 - corner1)}%`;
     setBorderRadius(string);
   }, [corner1, corner2, corner3, corner4]);
 
