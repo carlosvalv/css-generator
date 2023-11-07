@@ -9,15 +9,15 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { CodeBox } from './codeBox';
+import { CodeBox } from '../../components/codeBox';
 import {
   AnimationType,
   Direction,
   FillMode,
   Time,
   Timing,
-} from '../enums/animation';
-import { blink, bounce } from './animations';
+} from '../../enums/animation';
+import { blink, bounce } from '../../components/animations';
 
 const animations = [bounce, blink];
 

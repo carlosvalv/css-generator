@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CodeBox } from './codeBox';
+import { CodeBox } from '../../components/codeBox';
+import CustomRange from '../../components/customRange';
 
 const Container = styled.div`
   position: absolute;
@@ -98,62 +99,47 @@ function BoxShadow() {
         <Styles>
           <Style>
             <Text>Horizontal Offset</Text>
-            <Input
-              type="range"
-              max={100}
-              min={-100}
-              value={horizontalOffset}
-              onChange={(e: any) => {
-                setHorizontalOffset(e.target.value);
-              }}
+            <CustomRange
+              maxValue={100}
+              minValue={-100}
+              defaultValue={horizontalOffset}
+              handleChange={(newValue: number) => setHorizontalOffset(newValue)}
             />
           </Style>
           <Style>
             <Text>Vertical Offset</Text>
-            <Input
-              type="range"
-              max={100}
-              min={-100}
-              value={verticallOffset}
-              onChange={(e: any) => {
-                setVerticallOffset(e.target.value);
-              }}
+            <CustomRange
+              maxValue={100}
+              minValue={-100}
+              defaultValue={verticallOffset}
+              handleChange={(newValue: number) => setVerticallOffset(newValue)}
             />
           </Style>
           <Style>
             <Text>Blur</Text>
-            <Input
-              type="range"
-              max={300}
-              min={0}
-              value={blur}
-              onChange={(e: any) => {
-                setBlur(e.target.value);
-              }}
+            <CustomRange
+              maxValue={300}
+              minValue={0}
+              defaultValue={blur}
+              handleChange={(newValue: number) => setBlur(newValue)}
             />
           </Style>
           <Style>
             <Text>Spread Radius</Text>
-            <Input
-              type="range"
-              max={200}
-              min={-200}
-              value={spreadRadius}
-              onChange={(e: any) => {
-                setSpreadRadius(e.target.value);
-              }}
+            <CustomRange
+              maxValue={200}
+              minValue={-200}
+              defaultValue={spreadRadius}
+              handleChange={(newValue: number) => setSpreadRadius(newValue)}
             />
           </Style>
           <Style>
             <Text>Opacity</Text>
-            <Input
-              type="range"
-              max={100}
-              min={0}
-              value={opacity * 100}
-              onChange={(e: any) => {
-                setOpacity(e.target.value / 100);
-              }}
+            <CustomRange
+              maxValue={100}
+              minValue={0}
+              defaultValue={opacity * 100}
+              handleChange={(newValue: number) => setOpacity(newValue / 100)}
             />
           </Style>
           <Style>

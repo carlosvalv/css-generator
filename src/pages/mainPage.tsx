@@ -1,11 +1,11 @@
 import styled, { ThemeProvider } from 'styled-components';
 import { LeftMenu } from '../components/leftMenu';
-import BoxShadow from '../components/boxShadow';
+import BoxShadow from './BoxShadow/BoxShadow';
 import lightTheme from '../themes';
 import InterfaceProvider from '../providers/ui';
 import Header from '../components/header';
-import BorderRadius from '../components/borderRadius';
-import Animation from '../components/animation';
+import BorderRadius from './BorderRadius/BorderRadius';
+import Animation from './Animation/Animation';
 import Page from '../types/page';
 
 const Container = styled.div`

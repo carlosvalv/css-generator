@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CornerDraggable } from './cornerDraggable';
-import { CodeBox } from './codeBox';
+import { CornerDraggable } from '../../components/cornerDraggable';
+import { CodeBox } from '../../components/codeBox';
 
 const Container = styled.div`
   position: absolute;
