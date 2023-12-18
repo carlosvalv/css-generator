@@ -1,6 +1,6 @@
 export enum Time {
-  SECONDS = 0,
-  MILISECONDS = 1,
+  SECONDS = 'seconds',
+  MILISECONDS = 'miliseconds',
 }
 
 export enum Direction {
