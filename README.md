@@ -48,3 +48,6 @@ If you have any questions or suggestions, feel free to contact us at [valverdeal
 
 ## Acknowledgments
 Special thanks to the React community and all contributors to open-source projects that made this app possible.
+
+## Docker
+docker-compose up
