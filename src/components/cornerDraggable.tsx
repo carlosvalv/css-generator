@@ -92,7 +92,6 @@ export function CornerDraggable(props: CornerDraggableProps) {
       left={left}
       onMouseDown={handleDragStart}
       onTouchStart={handleDragStart}
-      draggable
     />
   );
 }
