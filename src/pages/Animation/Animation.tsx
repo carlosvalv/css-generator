@@ -97,7 +97,7 @@ function Animation() {
     setAnimationText(
       `${duration}${durationUnit} ${timingMode} ${delay}${delayUnit} ${
         infinite ? 'infinite' : iterations
-      } ${direction} ${fillMode};`
+      } ${direction} ${fillMode};`,
     );
     if (infinite) return;
     if (!refSquare || !refSquare.current) return;
@@ -164,7 +164,7 @@ function Animation() {
                 defaultValue={durationMeasure}
                 handleChange={(newValue) => {
                   setDurationMeasure(
-                    Time[getEnumKeyByEnumValue(Time, newValue) as keyof typeof Time]
+                    Time[getEnumKeyByEnumValue(Time, newValue) as keyof typeof Time],
                   );
                 }}
               />
@@ -221,7 +221,7 @@ function Animation() {
             defaultValue={direction}
             handleChange={(newValue) => {
               setDirection(
-                Direction[getEnumKeyByEnumValue(Direction, newValue) as keyof typeof Direction]
+                Direction[getEnumKeyByEnumValue(Direction, newValue) as keyof typeof Direction],
               );
             }}
             id="animation-direction-label"
@@ -232,7 +232,7 @@ function Animation() {
             defaultValue={fillMode}
             handleChange={(newValue) => {
               setFillMode(
-                FillMode[getEnumKeyByEnumValue(FillMode, newValue) as keyof typeof FillMode]
+                FillMode[getEnumKeyByEnumValue(FillMode, newValue) as keyof typeof FillMode],
               );
             }}
             id="animation-fill-label"
@@ -250,6 +250,7 @@ function Animation() {
         <Box animation={animationText} type={animationType} ref={refSquare} />
       </Wrapper>
       <CodeBox text={`animation: ${name} ${animationText}`} multiLine={false} />
+      {/*//@ts-ignore */}
       <CodeBox text={`@keyframes ${name}{${animations[animationType].rules}}`} multiLine />
     </Container>
   );
