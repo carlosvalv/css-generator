@@ -32,6 +32,8 @@
     "@typescript-eslint/comma-dangle" : "off",
     "linebreak-style" : "off",
     "object-curly-newline" : "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "spaced-comment": "off",
     "quotes": [
       "error",
       "single",

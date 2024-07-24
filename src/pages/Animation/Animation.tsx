@@ -10,14 +10,10 @@ import {
   TextField,
 } from '@mui/material';
 import { CodeBox } from '../../components/codeBox';
-import {
-  AnimationType,
-  Direction,
-  FillMode,
-  Time,
-  Timing,
-} from '../../enums/animation';
+import { AnimationType, Direction, FillMode, Time, Timing } from '../../enums/animation';
 import { blink, bounce } from '../../components/animations';
+import CustomSelect from '../../components/customSelect';
+import getEnumKeyByEnumValue from '../../services/utils/enums';
 
 const animations = [bounce, blink];
 
@@ -163,13 +159,15 @@ function Animation() {
                   setDuration(e.target.value);
                 }}
               />
-              <Select
-                value={durationMeasure}
-                onChange={(e: any) => setDurationMeasure(e.target.value)}
-              >
-                <MenuItem value={Time.SECONDS}>Seconds</MenuItem>
-                <MenuItem value={Time.MILISECONDS}>Miliseconds</MenuItem>
-              </Select>
+              <CustomSelect
+                values={Object.values(Time)}
+                defaultValue={durationMeasure}
+                handleChange={(newValue) => {
+                  setDurationMeasure(
+                    Time[getEnumKeyByEnumValue(Time, newValue) as keyof typeof Time],
+                  );
+                }}
+              />
             </WrapperInputs>
           </Style>
           <Style>
@@ -183,13 +181,13 @@ function Animation() {
                   setDelay(e.target.value);
                 }}
               />
-              <Select
-                value={delayMeasure}
-                onChange={(e: any) => setDelayMeasure(e.target.value)}
-              >
-                <MenuItem value={Time.SECONDS}>Seconds</MenuItem>
-                <MenuItem value={Time.MILISECONDS}>Miliseconds</MenuItem>
-              </Select>
+              <CustomSelect
+                values={Object.values(Time)}
+                defaultValue={delayMeasure}
+                handleChange={(newValue) => {
+                  setDelayMeasure(Time[getEnumKeyByEnumValue(Time, newValue) as keyof typeof Time]);
+                }}
+              />
             </WrapperInputs>
           </Style>
           {!infinite && (
@@ -217,76 +215,43 @@ function Animation() {
               }}
             />
           </Style>
-          <Style>
-            <FormControl style={{ flex: 1 }}>
-              <InputLabel id="animation-direction-label">Direction</InputLabel>
-              <Select
-                labelId="animation-direction-label"
-                label="Direction"
-                onChange={(e: any) => {
-                  setDirection(e.target.value);
-                }}
-                value={direction}
-              >
-                {Object.values(Direction).map((x) => (
-                  <MenuItem key={x} value={x}>
-                    {x}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Style>
-          <Style>
-            <FormControl style={{ flex: 1 }}>
-              <InputLabel id="animation-fill-label">Fill mode</InputLabel>
-              <Select
-                labelId="animation-fill-label"
-                label="Fill mode"
-                onChange={(e: any) => {
-                  setFillMode(e.target.value);
-                }}
-                value={fillMode}
-              >
-                {Object.values(FillMode).map((x) => (
-                  <MenuItem key={x} value={x}>
-                    {x}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Style>
-          <Style>
-            <FormControl style={{ flex: 1 }}>
-              <InputLabel id="animation-timing-label">Timing</InputLabel>
-              <Select
-                labelId="animation-timing-label"
-                label="Timing"
-                onChange={(e: any) => {
-                  setTimingMode(e.target.value);
-                }}
-                value={timingMode}
-              >
-                {Object.values(Timing).map((x) => (
-                  <MenuItem key={x} value={x}>
-                    {x}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Style>
+          <CustomSelect
+            label="Direction"
+            values={Object.values(Direction)}
+            defaultValue={direction}
+            handleChange={(newValue) => {
+              setDirection(
+                Direction[getEnumKeyByEnumValue(Direction, newValue) as keyof typeof Direction],
+              );
+            }}
+            id="animation-direction-label"
+          />
+          <CustomSelect
+            label="Fill mode"
+            values={Object.values(FillMode)}
+            defaultValue={fillMode}
+            handleChange={(newValue) => {
+              setFillMode(
+                FillMode[getEnumKeyByEnumValue(FillMode, newValue) as keyof typeof FillMode],
+              );
+            }}
+            id="animation-fill-label"
+          />
+          <CustomSelect
+            label="Timing"
+            values={Object.values(Timing)}
+            defaultValue={timingMode}
+            handleChange={(newValue) => {
+              setTimingMode(Timing[getEnumKeyByEnumValue(Timing, newValue) as keyof typeof Timing]);
+            }}
+            id="animation-timing-label"
+          />
         </Styles>
         <Box animation={animationText} type={animationType} ref={refSquare} />
       </Wrapper>
-      <CodeBox
-        text={`animation: ${name} ${animationText}`}
-        multiLine={false}
-      />
-      <CodeBox
-        text={
-          `@keyframes ${name}{${animations[animationType].rules}}`
-        }
-        multiLine
-      />
+      <CodeBox text={`animation: ${name} ${animationText}`} multiLine={false} />
+      {/*//@ts-ignore */}
+      <CodeBox text={`@keyframes ${name}{${animations[animationType].rules}}`} multiLine />
     </Container>
   );
 }

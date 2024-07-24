@@ -4,5 +4,5 @@
   "semi": true,
   "singleQuote": true,
   "trainingComa": "all",
-  "printWidth": 80
+  "printWidth": 100
 }

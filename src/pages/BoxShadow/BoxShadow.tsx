@@ -84,14 +84,7 @@ function BoxShadow() {
     setBoxShadow(
       `rgba(${r}, ${g}, ${b}, ${opacity}) ${horizontalOffset}px ${verticallOffset}px ${blur}px ${spreadRadius}px;`
     );
-  }, [
-    horizontalOffset,
-    verticallOffset,
-    blur,
-    spreadRadius,
-    opacity,
-    shadowColor,
-  ]);
+  }, [horizontalOffset, verticallOffset, blur, spreadRadius, opacity, shadowColor]);
 
   return (
     <Container>
