@@ -1,3 +1,6 @@
+import { Keyframes } from 'styled-components';
+import { blink, bounce, slideFade, spinScale } from '../components/animations';
+
 export enum Time {
   SECONDS = 'seconds',
   MILISECONDS = 'miliseconds',
@@ -25,7 +28,31 @@ export enum Timing {
   EASE_IN_OUT = 'ease-in-out',
 }
 
-export enum AnimationType {
-  BOUNCE = 0,
-  BLINK = 1,
-}
+type Animation = {
+  name: string;
+  value: number;
+  keyframe: Keyframes;
+};
+
+export const Animations: Animation[] = [
+  {
+    value: 0,
+    name: 'Bounce',
+    keyframe: bounce,
+  },
+  {
+    value: 1,
+    name: 'Blink',
+    keyframe: blink,
+  },
+  {
+    value: 2,
+    name: 'Slide fade',
+    keyframe: slideFade,
+  },
+  {
+    value: 3,
+    name: 'Spin scale',
+    keyframe: spinScale,
+  },
+];
