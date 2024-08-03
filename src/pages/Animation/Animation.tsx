@@ -10,12 +10,9 @@ import {
   TextField,
 } from '@mui/material';
 import { CodeBox } from '../../components/codeBox';
-import { AnimationType, Direction, FillMode, Time, Timing } from '../../enums/animation';
-import { blink, bounce } from '../../components/animations';
+import { Animations, Direction, FillMode, Time, Timing } from '../../enums/animation';
 import CustomSelect from '../../components/customSelect';
 import getEnumKeyByEnumValue from '../../services/utils/enums';
-
-const animations = [bounce, blink];
 
 const Container = styled.div`
   display: flex;
@@ -50,7 +47,7 @@ const Box = styled.div<{ animation: string; type: number }>`
   position: relative;
   margin: auto 0;
   border-radius: 1em;
-  animation: ${(props) => animations[props.type]} ${(props) => props.animation};
+  animation: ${(props) => Animations[props.type].keyframe} ${(props) => props.animation};
   @media (max-width: 1200px) {
     width: 55vmin;
     height: 55vmin;
@@ -87,7 +84,7 @@ function Animation() {
   const [direction, setDirection] = useState(Direction.NORMAL);
   const [fillMode, setFillMode] = useState(FillMode.FORWARDS);
   const [timingMode, setTimingMode] = useState(Timing.EASE);
-  const [animationType, setAnimationType] = useState(AnimationType.BLINK);
+  const [animationType, setAnimationType] = useState(0);
   const [infinite, setInfinite] = useState(false);
   const refSquare = useRef<HTMLDivElement>(null);
 
@@ -143,8 +140,11 @@ function Animation() {
                 }}
                 value={animationType}
               >
-                <MenuItem value={AnimationType.BLINK}>Blink</MenuItem>
-                <MenuItem value={AnimationType.BOUNCE}>Bounce</MenuItem>
+                {Animations.map((animation) => (
+                  <MenuItem key={animation.value} value={animation.value}>
+                    {animation.name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Style>
@@ -250,8 +250,8 @@ function Animation() {
         <Box animation={animationText} type={animationType} ref={refSquare} />
       </Wrapper>
       <CodeBox text={`animation: ${name} ${animationText}`} multiLine={false} />
-      {/*//@ts-ignore */}
-      <CodeBox text={`@keyframes ${name}{${animations[animationType].rules}}`} multiLine />
+      {/* @ts-ignore */}
+      <CodeBox text={`@keyframes ${name}{${Animations[animationType].keyframe.rules}}`} multiLine />
     </Container>
   );
 }
