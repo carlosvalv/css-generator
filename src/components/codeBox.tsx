@@ -19,7 +19,12 @@ const Container = styled.div<{ multiline: number }>`
 
 const Text = styled.span<{ multiline: number }>`
   font-size: 20px;
-  font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+  font-family:
+    Consolas,
+    Monaco,
+    Andale Mono,
+    Ubuntu Mono,
+    monospace;
   color: ${(props) => props.theme.colors.secondary900};
   ${(props) => props.multiline === 1 && 'white-space: pre;'};
   tab-size: 4;
@@ -86,12 +91,10 @@ export function CodeBox(props: CodeBoxProps) {
 
   return (
     <Container multiline={multiLine ? 1 : 0}>
-      <Text multiline={multiLine ? 1 : 0}>{text}</Text>
-      <Copy
-        onClick={copyToClipboard}
-        corner={multiLine ? 1 : 0}
-        copying={copying ? 1 : 0}
-      >
+      <Text className="code-text" multiline={multiLine ? 1 : 0}>
+        {text}
+      </Text>
+      <Copy onClick={copyToClipboard} corner={multiLine ? 1 : 0} copying={copying ? 1 : 0}>
         {copying ? (
           <CopiedText>Copied!</CopiedText>
         ) : (

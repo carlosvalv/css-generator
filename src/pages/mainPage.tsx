@@ -7,6 +7,7 @@ import Header from '../components/header';
 import BorderRadius from './BorderRadius/BorderRadius';
 import Animation from './Animation/Animation';
 import Page from '../types/page';
+import Scrollbar from './Scrollbar/Scrollbar';
 
 const Container = styled.div`
   display: flex;
@@ -38,6 +39,8 @@ function MainPage(props: MainPageProps) {
     switch (page) {
       case Page.BOX_SHADOW:
         return <BoxShadow />;
+      case Page.SCROLLBAR:
+        return <Scrollbar />;
       case Page.ANIMATION:
         return <Animation />;
       case Page.BORDER_RADIUS:

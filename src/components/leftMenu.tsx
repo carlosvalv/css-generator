@@ -85,6 +85,9 @@ export function LeftMenu(props: LeftMenuProps) {
         <LinkWrapper highlight={page === Page.ANIMATION ? 1 : 0}>
           <Link to="/animation">animations</Link>
         </LinkWrapper>
+        <LinkWrapper highlight={page === Page.SCROLLBAR ? 1 : 0}>
+          <Link to="/scrollbar">scrollbar</Link>
+        </LinkWrapper>
       </List>
     </Container>
   );
