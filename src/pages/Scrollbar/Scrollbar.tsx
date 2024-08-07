@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CodeBox } from '../../components/codeBox';
+import CustomRange from '../../components/customRange';
 
 const Container = styled.div<{ code: string }>`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  height: calc(100% - 4em);
+  width: calc(100% - 4em);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,42 +63,47 @@ const Input = styled.input`
 function Scrollbar() {
   const [thumbColor, setThumbColor] = useState('#000000');
   const [trackColor, setTrackColor] = useState('#ffffff');
+  const [size, setSize] = useState(20);
+  const [borderRadius, setBorderRadius] = useState(10);
+  const [thumbBorderWidth, setThumbBorderWidth] = useState(1);
+  const [thumbBorderColor, setThumbBorderColor] = useState('#ed1818');
   const [code, setCode] = useState('');
 
   useEffect(() => {
-    setCode(
-      `* {
+    const cssCode = `
+* {
   --sb-track-color: ${trackColor};
   --sb-thumb-color: ${thumbColor};
-  --sb-size: 30px;
-};  
+  --sb-size: ${size}px;
+}
 
 *::-webkit-scrollbar {
-  width: var(--sb-size)
+  width: var(--sb-size);
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--sb-track-color);
-  border-radius: 3px;
+  background: var(--sb-track-color) !important;
+  border-radius: ${borderRadius}px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--sb-thumb-color);
-  border-radius: 3px;
-  
+  background: var(--sb-thumb-color) !important;
+  border-radius: ${borderRadius}px;
+  ${thumbBorderWidth > 0 ? `border: ${thumbBorderWidth}px solid ${thumbBorderColor};` : ''}
 }
 
 @supports not selector(::-webkit-scrollbar) {
   * {
-    scrollbar-color: var(--sb-thumb-color)
-                     var(--sb-track-color);
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
-}`,
-    );
-  }, [thumbColor]);
+}
+    `;
+
+    setCode(cssCode);
+  }, [trackColor, thumbColor, size, borderRadius, thumbBorderWidth, thumbBorderColor]);
 
   useEffect(() => {
-    let styleElement = document.querySelector('.scrollbar');
+    let styleElement = document.querySelector('#dynamic-styles');
 
     if (!styleElement) {
       styleElement = document.createElement('style');
@@ -132,6 +140,43 @@ function Scrollbar() {
               value={thumbColor}
               onChange={(e: any) => {
                 setThumbColor(e.target.value);
+              }}
+            />
+          </Style>
+          <Style>
+            <Text>Size</Text>
+            <CustomRange
+              maxValue={150}
+              minValue={0}
+              defaultValue={20}
+              handleChange={(newValue: number) => setSize(newValue)}
+            />
+          </Style>
+          <Style>
+            <Text>Border radius</Text>
+            <CustomRange
+              maxValue={60}
+              minValue={0}
+              defaultValue={10}
+              handleChange={(newValue: number) => setBorderRadius(newValue)}
+            />
+          </Style>
+          <Style>
+            <Text>Thumb border width</Text>
+            <CustomRange
+              maxValue={100}
+              minValue={0}
+              defaultValue={1}
+              handleChange={(newValue: number) => setThumbBorderWidth(newValue)}
+            />
+          </Style>
+          <Style>
+            <Text>Thumb borrder color</Text>
+            <Input
+              type="color"
+              value={thumbBorderColor}
+              onChange={(e: any) => {
+                setThumbBorderColor(e.target.value);
               }}
             />
           </Style>
