@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CodeBox } from '../../components/codeBox';
 import CustomRange from '../../components/customRange';
 
-const Container = styled.div<{ code: string }>`
+const Container = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
@@ -70,7 +70,7 @@ function Scrollbar() {
   const [code, setCode] = useState('');
 
   useEffect(() => {
-    const cssCode = `
+    const cssCodeForCodeBox = `
 * {
   --sb-track-color: ${trackColor};
   --sb-thumb-color: ${thumbColor};
@@ -99,7 +99,7 @@ function Scrollbar() {
 }
     `;
 
-    setCode(cssCode);
+    setCode(cssCodeForCodeBox);
   }, [trackColor, thumbColor, size, borderRadius, thumbBorderWidth, thumbBorderColor]);
 
   useEffect(() => {
@@ -111,16 +111,49 @@ function Scrollbar() {
       document.head.appendChild(styleElement);
     }
 
-    styleElement.textContent = code;
+    const cssCodeForApp = `
+#scrollbar span {
+  --sb-track-color: ${trackColor} !important;
+  --sb-thumb-color: ${thumbColor} !important;
+  --sb-size: ${size}px !important;
+}
+
+#scrollbar span::-webkit-scrollbar {
+  width: var(--sb-size) !important;
+}
+
+#scrollbar span::-webkit-scrollbar-track {
+  background: var(--sb-track-color) !important;
+  border-radius: ${borderRadius}px !important;
+}
+
+#scrollbar span::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color) !important;
+  border-radius: ${borderRadius}px !important;
+${
+  thumbBorderWidth > 0
+    ? `border: ${thumbBorderWidth}px solid ${thumbBorderColor}; !important`
+    : ''
+}
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  #scrollbar span {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color) !important;
+  }
+}
+    `;
+
+    styleElement.textContent = cssCodeForApp; // Este código se inyecta en el documento
     return () => {
       if (styleElement) {
         styleElement.remove();
       }
     };
-  }, [code]);
+  }, [trackColor, thumbColor, size, borderRadius, thumbBorderWidth, thumbBorderColor]);
 
   return (
-    <Container code={code} id="scrollbar">
+    <Container id="scrollbar">
       <Wrapper>
         <Styles>
           <Style>
@@ -171,7 +204,7 @@ function Scrollbar() {
             />
           </Style>
           <Style>
-            <Text>Thumb borrder color</Text>
+            <Text>Thumb border color</Text>
             <Input
               type="color"
               value={thumbBorderColor}

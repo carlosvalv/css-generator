@@ -86,7 +86,7 @@ export function CodeBox(props: CodeBoxProps) {
     setCopying(true);
     setTimeout(() => {
       setCopying(false);
-    }, 4000);
+    }, 3000);
   };
 
   return (
