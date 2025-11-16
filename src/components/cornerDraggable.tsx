@@ -12,9 +12,8 @@ const Container = styled.div<{ top: number; left: number; dragging: number }>`
   cursor: move;
   transform: ${(props) => (props.dragging ? 'translate(-50%, -50%)' : 'translate(-50%, -50%)')};
   box-shadow: ${(props) => (props.dragging ? '0 0 10px rgba(0, 0, 0, 0.3)' : 'none')};
-  background-color: ${(props) => (props.dragging
-    ? props.theme.colors.primary500
-    : props.theme.colors.secondary500)};
+  background-color: ${(props) =>
+    props.dragging ? props.theme.colors.primary500 : props.theme.colors.secondary500};
   opacity: 0.6;
   &:hover,
   &:active {
@@ -31,9 +30,7 @@ export type CornerDraggableProps = {
 };
 
 export function CornerDraggable(props: CornerDraggableProps) {
-  const {
-    initTop, initLeft, horizontal, handleChangeValue,
-  } = props;
+  const { initTop, initLeft, horizontal, handleChangeValue } = props;
 
   const [top, setTop] = useState(initTop);
   const [left, setLeft] = useState(initLeft);
@@ -84,6 +81,15 @@ export function CornerDraggable(props: CornerDraggableProps) {
       document.removeEventListener('touchend', handleDragEnd);
     };
   }, [dragging, top, props]);
+
+  useEffect(() => {
+    const handleSelectStart = (e: Event) => {
+      if (dragging) e.preventDefault();
+    };
+
+    document.addEventListener('selectstart', handleSelectStart);
+    return () => document.removeEventListener('selectstart', handleSelectStart);
+  }, [dragging]);
 
   return (
     <Container
